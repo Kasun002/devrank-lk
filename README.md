@@ -28,10 +28,24 @@ All metrics are based on the **past 12 months** of activity.
 ## Add yourself to the rankings
 
 1. Fork this repo
-2. Add your GitHub username to [`data/users.json`](data/users.json):
+2. Open [`data/users.json`](data/users.json) and add your entry:
+   - Find the **last line** that starts with `{` (the last person in the list)
+   - Add a **comma** `,` at the end of that line
+   - Then add your entry on a new line **before** the closing `]`
+
+   **Example — before:**
    ```json
-   { "github": "your-github-username" }
+      { "github": "some-user", "note": "" }
+   ]
    ```
+   **Example — after:**
+   ```json
+      { "github": "some-user", "note": "" },
+      { "github": "your-github-username", "note": "" }
+   ]
+   ```
+   > **Important:** The comma after the previous entry is required. Without it you will get a JSON syntax error and your PR cannot be merged.
+
 3. Open a Pull Request
 
 ---
