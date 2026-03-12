@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-03-12T07:41:43.935255+00:00",
-  "total_users": 7,
+  "generated_at": "2026-03-12T08:37:38.870775+00:00",
+  "total_users": 8,
   "rankings": [
     {
       "login": "ktauchathuranga",
@@ -11,7 +11,7 @@
       "website": "https://ktauchathuranga.github.io",
       "location": "Sri Lanka",
       "followers": 24,
-      "commits_this_year": 1247,
+      "commits_this_year": 1252,
       "prs_this_year": 137,
       "issues_this_year": 164,
       "total_stars": 59,
@@ -22,7 +22,7 @@
         "Python",
         "Shell"
       ],
-      "score": 5014,
+      "score": 5029,
       "github_url": "https://github.com/ktauchathuranga",
       "rank": 1
     },
@@ -35,9 +35,9 @@
       "website": "https://www.linkedin.com/in/minoka-wickramasinghe-3b7198194/",
       "location": "Kegalle",
       "followers": 23,
-      "commits_this_year": 402,
-      "prs_this_year": 36,
-      "issues_this_year": 13,
+      "commits_this_year": 406,
+      "prs_this_year": 37,
+      "issues_this_year": 22,
       "total_stars": 52,
       "public_repos": 48,
       "repos_contributed_to": 34,
@@ -46,9 +46,33 @@
         "HTML",
         "JavaScript"
       ],
-      "score": 1643,
+      "score": 1678,
       "github_url": "https://github.com/Minokainduwara",
       "rank": 2
+    },
+    {
+      "login": "pawanthathsara987",
+      "name": "S.A.P.T. SAMARATHUNGA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/142471286?u=51476582a54e4da416a32b3eb712cfee5d3f2f92&v=4",
+      "bio": "I am an Undergraduate student at the University of Ruhuna, Faculty of Technology. ",
+      "company": "University of Ruhuna",
+      "website": "",
+      "location": "",
+      "followers": 1,
+      "commits_this_year": 231,
+      "prs_this_year": 28,
+      "issues_this_year": 0,
+      "total_stars": 2,
+      "public_repos": 20,
+      "repos_contributed_to": 13,
+      "top_languages": [
+        "JavaScript",
+        "CSS",
+        "EJS"
+      ],
+      "score": 842,
+      "github_url": "https://github.com/pawanthathsara987",
+      "rank": 3
     },
     {
       "login": "ishansivmal",
@@ -72,7 +96,7 @@
       ],
       "score": 748,
       "github_url": "https://github.com/ishansivmal",
-      "rank": 3
+      "rank": 4
     },
     {
       "login": "chapayev0",
@@ -96,7 +120,7 @@
       ],
       "score": 422,
       "github_url": "https://github.com/chapayev0",
-      "rank": 4
+      "rank": 5
     },
     {
       "login": "SLUICEPRJCT",
@@ -118,7 +142,7 @@
       ],
       "score": 1,
       "github_url": "https://github.com/SLUICEPRJCT",
-      "rank": 5
+      "rank": 6
     },
     {
       "login": "prasadrandombage",
@@ -140,7 +164,7 @@
       ],
       "score": 0,
       "github_url": "https://github.com/prasadrandombage",
-      "rank": 6
+      "rank": 7
     },
     {
       "login": "mihos",
@@ -160,7 +184,7 @@
       "top_languages": [],
       "score": 0,
       "github_url": "https://github.com/mihos",
-      "rank": 7
+      "rank": 8
     }
   ]
 }
