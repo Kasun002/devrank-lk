@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-03-12T08:37:38.870775+00:00",
-  "total_users": 8,
+  "generated_at": "2026-03-12T09:38:20.047648+00:00",
+  "total_users": 10,
   "rankings": [
     {
       "login": "ktauchathuranga",
@@ -11,9 +11,9 @@
       "website": "https://ktauchathuranga.github.io",
       "location": "Sri Lanka",
       "followers": 24,
-      "commits_this_year": 1252,
+      "commits_this_year": 1254,
       "prs_this_year": 137,
-      "issues_this_year": 164,
+      "issues_this_year": 165,
       "total_stars": 59,
       "public_repos": 67,
       "repos_contributed_to": 49,
@@ -22,9 +22,33 @@
         "Python",
         "Shell"
       ],
-      "score": 5029,
+      "score": 5037,
       "github_url": "https://github.com/ktauchathuranga",
       "rank": 1
+    },
+    {
+      "login": "Dineshs737",
+      "name": "Uthayakumar Dinesh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/112531821?u=19bd0d10de702da4a9772ec838e0858ed8884e73&v=4",
+      "bio": "",
+      "company": "",
+      "website": "",
+      "location": "",
+      "followers": 3,
+      "commits_this_year": 376,
+      "prs_this_year": 91,
+      "issues_this_year": 41,
+      "total_stars": 4,
+      "public_repos": 13,
+      "repos_contributed_to": 13,
+      "top_languages": [
+        "TypeScript",
+        "JavaScript",
+        "Go"
+      ],
+      "score": 1684,
+      "github_url": "https://github.com/Dineshs737",
+      "rank": 2
     },
     {
       "login": "Minokainduwara",
@@ -48,7 +72,31 @@
       ],
       "score": 1678,
       "github_url": "https://github.com/Minokainduwara",
-      "rank": 2
+      "rank": 3
+    },
+    {
+      "login": "dilushamadushan",
+      "name": "Dilusha Madushan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/164498659?u=2b08829e82d22331e7e5c11f1d02b3ccba29b4cd&v=4",
+      "bio": "I\u2019m passionate about full-stack engineering",
+      "company": "",
+      "website": "",
+      "location": "",
+      "followers": 8,
+      "commits_this_year": 388,
+      "prs_this_year": 72,
+      "issues_this_year": 3,
+      "total_stars": 13,
+      "public_repos": 30,
+      "repos_contributed_to": 30,
+      "top_languages": [
+        "JavaScript",
+        "Java",
+        "HTML"
+      ],
+      "score": 1590,
+      "github_url": "https://github.com/dilushamadushan",
+      "rank": 4
     },
     {
       "login": "pawanthathsara987",
@@ -72,7 +120,7 @@
       ],
       "score": 842,
       "github_url": "https://github.com/pawanthathsara987",
-      "rank": 3
+      "rank": 5
     },
     {
       "login": "ishansivmal",
@@ -96,7 +144,7 @@
       ],
       "score": 748,
       "github_url": "https://github.com/ishansivmal",
-      "rank": 4
+      "rank": 6
     },
     {
       "login": "chapayev0",
@@ -120,7 +168,7 @@
       ],
       "score": 422,
       "github_url": "https://github.com/chapayev0",
-      "rank": 5
+      "rank": 7
     },
     {
       "login": "SLUICEPRJCT",
@@ -142,7 +190,7 @@
       ],
       "score": 1,
       "github_url": "https://github.com/SLUICEPRJCT",
-      "rank": 6
+      "rank": 8
     },
     {
       "login": "prasadrandombage",
@@ -164,7 +212,7 @@
       ],
       "score": 0,
       "github_url": "https://github.com/prasadrandombage",
-      "rank": 7
+      "rank": 9
     },
     {
       "login": "mihos",
@@ -184,7 +232,7 @@
       "top_languages": [],
       "score": 0,
       "github_url": "https://github.com/mihos",
-      "rank": 8
+      "rank": 10
     }
   ]
 }
