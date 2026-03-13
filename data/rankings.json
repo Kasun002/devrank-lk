@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-03-12T19:49:16.175428+00:00",
-  "total_users": 12,
+  "generated_at": "2026-03-13T04:18:30.736930+00:00",
+  "total_users": 14,
   "rankings": [
     {
       "login": "sameerasw",
@@ -11,10 +11,10 @@
       "website": "https://sameerasw.com",
       "location": "Sri Lanka",
       "followers": 478,
-      "commits_this_year": 6321,
-      "prs_this_year": 240,
+      "commits_this_year": 6322,
+      "prs_this_year": 241,
       "issues_this_year": 100,
-      "total_stars": 3667,
+      "total_stars": 3668,
       "public_repos": 80,
       "repos_contributed_to": 42,
       "top_languages": [
@@ -22,7 +22,7 @@
         "Java",
         "Kotlin"
       ],
-      "score": 35509,
+      "score": 35521,
       "github_url": "https://github.com/sameerasw",
       "rank": 1
     },
@@ -35,7 +35,7 @@
       "website": "https://ktauchathuranga.github.io",
       "location": "Sri Lanka",
       "followers": 26,
-      "commits_this_year": 1254,
+      "commits_this_year": 1256,
       "prs_this_year": 137,
       "issues_this_year": 165,
       "total_stars": 61,
@@ -46,9 +46,33 @@
         "Python",
         "Shell"
       ],
-      "score": 5047,
+      "score": 5053,
       "github_url": "https://github.com/ktauchathuranga",
       "rank": 2
+    },
+    {
+      "login": "Minokainduwara",
+      "name": "Minoka Wickramasinghe",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76654300?u=6954ce843d3bc095a5d125303b0a96744bca17bf&v=4",
+      "bio": "BICT student at University of Ruhuna.\r\nA self learning Full stack developer & Game Developer. \r\n",
+      "company": "",
+      "website": "https://www.linkedin.com/in/minoka-wickramasinghe-3b7198194/",
+      "location": "Kegalle",
+      "followers": 23,
+      "commits_this_year": 410,
+      "prs_this_year": 37,
+      "issues_this_year": 22,
+      "total_stars": 52,
+      "public_repos": 49,
+      "repos_contributed_to": 35,
+      "top_languages": [
+        "C++",
+        "HTML",
+        "JavaScript"
+      ],
+      "score": 1690,
+      "github_url": "https://github.com/Minokainduwara",
+      "rank": 3
     },
     {
       "login": "Dineshs737",
@@ -72,30 +96,6 @@
       ],
       "score": 1684,
       "github_url": "https://github.com/Dineshs737",
-      "rank": 3
-    },
-    {
-      "login": "Minokainduwara",
-      "name": "Minoka Wickramasinghe",
-      "avatar_url": "https://avatars.githubusercontent.com/u/76654300?u=6954ce843d3bc095a5d125303b0a96744bca17bf&v=4",
-      "bio": "BICT student at University of Ruhuna.\r\nA self learning Full stack developer & Game Developer. \r\n",
-      "company": "",
-      "website": "https://www.linkedin.com/in/minoka-wickramasinghe-3b7198194/",
-      "location": "Kegalle",
-      "followers": 23,
-      "commits_this_year": 406,
-      "prs_this_year": 37,
-      "issues_this_year": 22,
-      "total_stars": 52,
-      "public_repos": 48,
-      "repos_contributed_to": 34,
-      "top_languages": [
-        "C++",
-        "HTML",
-        "JavaScript"
-      ],
-      "score": 1678,
-      "github_url": "https://github.com/Minokainduwara",
       "rank": 4
     },
     {
@@ -195,6 +195,30 @@
       "rank": 8
     },
     {
+      "login": "randil-h",
+      "name": "randil-h",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51442488?u=420bd5ccffb6198a24b57dd42313350773174fd9&v=4",
+      "bio": "",
+      "company": "",
+      "website": "",
+      "location": "",
+      "followers": 7,
+      "commits_this_year": 135,
+      "prs_this_year": 7,
+      "issues_this_year": 0,
+      "total_stars": 0,
+      "public_repos": 25,
+      "repos_contributed_to": 16,
+      "top_languages": [
+        "JavaScript",
+        "Java",
+        "Jupyter Notebook"
+      ],
+      "score": 447,
+      "github_url": "https://github.com/randil-h",
+      "rank": 9
+    },
+    {
       "login": "chapayev0",
       "name": "Dilahara MMS",
       "avatar_url": "https://avatars.githubusercontent.com/u/41099408?u=a8b4d64531749f4518b843c1050c45bedf6fca35&v=4",
@@ -216,7 +240,29 @@
       ],
       "score": 422,
       "github_url": "https://github.com/chapayev0",
-      "rank": 9
+      "rank": 10
+    },
+    {
+      "login": "Dhanushka11222",
+      "name": "Dhanushka Maduranga",
+      "avatar_url": "https://avatars.githubusercontent.com/u/138849605?u=00f446cb274bcbbbf2d5e40f3ac48198a032df53&v=4",
+      "bio": "",
+      "company": "",
+      "website": "",
+      "location": "",
+      "followers": 0,
+      "commits_this_year": 7,
+      "prs_this_year": 1,
+      "issues_this_year": 0,
+      "total_stars": 0,
+      "public_repos": 1,
+      "repos_contributed_to": 2,
+      "top_languages": [
+        "HTML"
+      ],
+      "score": 26,
+      "github_url": "https://github.com/Dhanushka11222",
+      "rank": 11
     },
     {
       "login": "SLUICEPRJCT",
@@ -238,7 +284,7 @@
       ],
       "score": 1,
       "github_url": "https://github.com/SLUICEPRJCT",
-      "rank": 10
+      "rank": 12
     },
     {
       "login": "prasadrandombage",
@@ -260,7 +306,7 @@
       ],
       "score": 0,
       "github_url": "https://github.com/prasadrandombage",
-      "rank": 11
+      "rank": 13
     },
     {
       "login": "mihos",
@@ -280,7 +326,7 @@
       "top_languages": [],
       "score": 0,
       "github_url": "https://github.com/mihos",
-      "rank": 12
+      "rank": 14
     }
   ]
 }
