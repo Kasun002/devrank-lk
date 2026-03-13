@@ -561,7 +561,8 @@
       list.innerHTML = `<div class="empty-state">No developers found.</div>`;
       return;
     }
-    list.innerHTML = users.map((u, i) => renderCard(u, i + 1)).join('');
+    // Keep original/global rank from dataset when filtering/searching.
+    list.innerHTML = users.map((u, i) => renderCard(u, u.rank || i + 1)).join('');
   }
 
   function sortAndFilter() {
