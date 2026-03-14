@@ -80,4 +80,19 @@ jobs:
         run: |
           echo "All checks passed. Merging PR..."
           gh pr merge ${{ github.event.pull_request.number }} --merge
+
+      - name: Post thank-you comment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} --body "🎉 Thank you @${{ github.event.pull_request.user.login }} for adding yourself to the **GitHub Sri Lanka Developer Rankings**!
+
+          Your entry has been successfully merged.
+
+          **What happens next?**
+          - The rankings are updated every **Sunday** via an automated workflow.
+          - On the next update, your GitHub stats will be fetched and your name will appear on the **[live leaderboard](https://ktauchathuranga.github.io/devrank-lk/)**.
+          - Your score is calculated based on your commits, pull requests, issues, stars, and followers from the past 12 months.
+
+          Welcome to the community!"
           
