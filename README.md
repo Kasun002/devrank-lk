@@ -2,6 +2,12 @@
 
 A weekly-updated leaderboard of Sri Lankan GitHub developers, ranked by open-source activity.
 
+<p align="center">
+  <img src="images/ss.png" alt="Screenshot of the website" width="800">
+  <br>
+  <em></em>
+</p>
+
 > [!NOTE]  
 > **Live site →** [devrank-lk](https://ktauchathuranga.github.io/devrank-lk/)
 
