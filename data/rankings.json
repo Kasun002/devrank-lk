@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-03-14T13:07:57.810974+00:00",
-  "total_users": 21,
+  "generated_at": "2026-03-14T14:00:41.656836+00:00",
+  "total_users": 22,
   "rankings": [
     {
       "login": "sameerasw",
@@ -35,7 +35,7 @@
       "website": "https://ktauchathuranga.github.io",
       "location": "Sri Lanka",
       "followers": 26,
-      "commits_this_year": 1260,
+      "commits_this_year": 1261,
       "prs_this_year": 137,
       "issues_this_year": 166,
       "total_stars": 62,
@@ -46,7 +46,7 @@
         "Python",
         "Shell"
       ],
-      "score": 5071,
+      "score": 5074,
       "github_url": "https://github.com/ktauchathuranga",
       "rank": 2
     },
@@ -147,6 +147,30 @@
       "rank": 6
     },
     {
+      "login": "MohamedSharfan",
+      "name": "Sharfan Saleem",
+      "avatar_url": "https://avatars.githubusercontent.com/u/182746015?u=10abf6acb2d4f13bccd9ecfd5d5d8acceb4012b6&v=4",
+      "bio": "Python developer | Open source contributor | GSoC 2026 aspirant",
+      "company": "university of ruhuna",
+      "website": "https://mohamedsharfan.github.io/myPortfolio/",
+      "location": "kandy",
+      "followers": 2,
+      "commits_this_year": 306,
+      "prs_this_year": 43,
+      "issues_this_year": 9,
+      "total_stars": 3,
+      "public_repos": 24,
+      "repos_contributed_to": 27,
+      "top_languages": [
+        "Python",
+        "JavaScript",
+        "CSS"
+      ],
+      "score": 1165,
+      "github_url": "https://github.com/MohamedSharfan",
+      "rank": 7
+    },
+    {
       "login": "bdhamithkumara",
       "name": "Dhamith Kumara",
       "avatar_url": "https://avatars.githubusercontent.com/u/67802429?u=348073f1eab1f46ddcdf8d22cf9c1d69814f3363&v=4",
@@ -168,7 +192,7 @@
       ],
       "score": 1075,
       "github_url": "https://github.com/bdhamithkumara",
-      "rank": 7
+      "rank": 8
     },
     {
       "login": "pawanthathsara987",
@@ -192,7 +216,7 @@
       ],
       "score": 842,
       "github_url": "https://github.com/pawanthathsara987",
-      "rank": 8
+      "rank": 9
     },
     {
       "login": "RasheedhulMuneer1",
@@ -216,7 +240,7 @@
       ],
       "score": 822,
       "github_url": "https://github.com/RasheedhulMuneer1",
-      "rank": 9
+      "rank": 10
     },
     {
       "login": "ishansivmal",
@@ -240,7 +264,7 @@
       ],
       "score": 753,
       "github_url": "https://github.com/ishansivmal",
-      "rank": 10
+      "rank": 11
     },
     {
       "login": "bl4ckf0xk",
@@ -264,7 +288,7 @@
       ],
       "score": 656,
       "github_url": "https://github.com/bl4ckf0xk",
-      "rank": 11
+      "rank": 12
     },
     {
       "login": "thidaskaveesha",
@@ -288,7 +312,7 @@
       ],
       "score": 630,
       "github_url": "https://github.com/thidaskaveesha",
-      "rank": 12
+      "rank": 13
     },
     {
       "login": "randil-h",
@@ -312,7 +336,7 @@
       ],
       "score": 447,
       "github_url": "https://github.com/randil-h",
-      "rank": 13
+      "rank": 14
     },
     {
       "login": "chapayev0",
@@ -336,7 +360,7 @@
       ],
       "score": 425,
       "github_url": "https://github.com/chapayev0",
-      "rank": 14
+      "rank": 15
     },
     {
       "login": "Bl4ke100",
@@ -360,7 +384,7 @@
       ],
       "score": 380,
       "github_url": "https://github.com/Bl4ke100",
-      "rank": 15
+      "rank": 16
     },
     {
       "login": "abdrhxyii",
@@ -384,7 +408,7 @@
       ],
       "score": 171,
       "github_url": "https://github.com/abdrhxyii",
-      "rank": 16
+      "rank": 17
     },
     {
       "login": "Perera-KD",
@@ -404,7 +428,7 @@
       "top_languages": [],
       "score": 62,
       "github_url": "https://github.com/Perera-KD",
-      "rank": 17
+      "rank": 18
     },
     {
       "login": "Dhanushka11222",
@@ -424,7 +448,7 @@
       "top_languages": [],
       "score": 14,
       "github_url": "https://github.com/Dhanushka11222",
-      "rank": 18
+      "rank": 19
     },
     {
       "login": "SLUICEPRJCT",
@@ -446,7 +470,7 @@
       ],
       "score": 1,
       "github_url": "https://github.com/SLUICEPRJCT",
-      "rank": 19
+      "rank": 20
     },
     {
       "login": "prasadrandombage",
@@ -468,7 +492,7 @@
       ],
       "score": 0,
       "github_url": "https://github.com/prasadrandombage",
-      "rank": 20
+      "rank": 21
     },
     {
       "login": "mihos",
@@ -488,7 +512,7 @@
       "top_languages": [],
       "score": 0,
       "github_url": "https://github.com/mihos",
-      "rank": 21
+      "rank": 22
     }
   ]
 }
