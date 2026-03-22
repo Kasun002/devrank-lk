@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-22T21:53:23.434205+00:00",
+  "generated_at": "2026-03-22T22:34:51.951553+00:00",
   "total_users": 25,
   "rankings": [
     {
@@ -14,7 +14,7 @@
       "commits_this_year": 6244,
       "prs_this_year": 242,
       "issues_this_year": 102,
-      "total_stars": 3798,
+      "total_stars": 3799,
       "public_repos": 80,
       "repos_contributed_to": 42,
       "top_languages": [
@@ -22,9 +22,12 @@
         "Java",
         "Kotlin"
       ],
+      "location_verified": true,
       "score": 1000,
       "github_url": "https://github.com/sameerasw",
-      "rank": 1
+      "rank": 1,
+      "previous_score": 1000,
+      "previous_rank": 1
     },
     {
       "login": "ktauchathuranga",
@@ -35,7 +38,7 @@
       "website": "https://ktauchathuranga.github.io",
       "location": "Sri Lanka",
       "followers": 26,
-      "commits_this_year": 1261,
+      "commits_this_year": 1263,
       "prs_this_year": 135,
       "issues_this_year": 174,
       "total_stars": 65,
@@ -46,9 +49,12 @@
         "Python",
         "Shell"
       ],
+      "location_verified": true,
       "score": 142,
       "github_url": "https://github.com/ktauchathuranga",
-      "rank": 2
+      "rank": 2,
+      "previous_score": 142,
+      "previous_rank": 2
     },
     {
       "login": "Minokainduwara",
@@ -70,9 +76,12 @@
         "HTML",
         "Java"
       ],
+      "location_verified": true,
       "score": 58,
       "github_url": "https://github.com/Minokainduwara",
-      "rank": 3
+      "rank": 3,
+      "previous_score": 58,
+      "previous_rank": 3
     },
     {
       "login": "Dineshs737",
@@ -94,9 +103,12 @@
         "JavaScript",
         "Go"
       ],
+      "location_verified": false,
       "score": 47,
       "github_url": "https://github.com/Dineshs737",
-      "rank": 4
+      "rank": 4,
+      "previous_score": 47,
+      "previous_rank": 4
     },
     {
       "login": "dilushamadushan",
@@ -118,9 +130,12 @@
         "Java",
         "HTML"
       ],
+      "location_verified": false,
       "score": 46,
       "github_url": "https://github.com/dilushamadushan",
-      "rank": 5
+      "rank": 5,
+      "previous_score": 46,
+      "previous_rank": 5
     },
     {
       "login": "Pasindu-Jayasundara",
@@ -142,9 +157,12 @@
         "JavaScript",
         "HTML"
       ],
+      "location_verified": true,
       "score": 45,
       "github_url": "https://github.com/Pasindu-Jayasundara",
-      "rank": 6
+      "rank": 6,
+      "previous_score": 45,
+      "previous_rank": 6
     },
     {
       "login": "lahirunirmalx",
@@ -156,7 +174,7 @@
       "location": "Colombo,Srilanka",
       "followers": 7,
       "commits_this_year": 271,
-      "prs_this_year": 108,
+      "prs_this_year": 109,
       "issues_this_year": 0,
       "total_stars": 43,
       "public_repos": 39,
@@ -166,9 +184,12 @@
         "PHP",
         "TypeScript"
       ],
+      "location_verified": true,
       "score": 43,
       "github_url": "https://github.com/lahirunirmalx",
-      "rank": 7
+      "rank": 7,
+      "previous_score": 43,
+      "previous_rank": 7
     },
     {
       "login": "MohamedSharfan",
@@ -190,9 +211,12 @@
         "JavaScript",
         "CSS"
       ],
+      "location_verified": true,
       "score": 33,
       "github_url": "https://github.com/MohamedSharfan",
-      "rank": 8
+      "rank": 8,
+      "previous_score": 33,
+      "previous_rank": 8
     },
     {
       "login": "bdhamithkumara",
@@ -214,9 +238,12 @@
         "TypeScript",
         "CSS"
       ],
+      "location_verified": true,
       "score": 30,
       "github_url": "https://github.com/bdhamithkumara",
-      "rank": 9
+      "rank": 9,
+      "previous_score": 30,
+      "previous_rank": 9
     },
     {
       "login": "ishansivmal",
@@ -238,9 +265,12 @@
         "TypeScript",
         "Java"
       ],
+      "location_verified": true,
       "score": 26,
       "github_url": "https://github.com/ishansivmal",
-      "rank": 10
+      "rank": 10,
+      "previous_score": 26,
+      "previous_rank": 10
     },
     {
       "login": "pawanthathsara987",
@@ -262,9 +292,12 @@
         "CSS",
         "EJS"
       ],
+      "location_verified": false,
       "score": 24,
       "github_url": "https://github.com/pawanthathsara987",
-      "rank": 11
+      "rank": 11,
+      "previous_score": 24,
+      "previous_rank": 11
     },
     {
       "login": "RasheedhulMuneer1",
@@ -286,9 +319,12 @@
         "Jupyter Notebook",
         "Java"
       ],
+      "location_verified": false,
       "score": 23,
       "github_url": "https://github.com/RasheedhulMuneer1",
-      "rank": 12
+      "rank": 12,
+      "previous_score": 23,
+      "previous_rank": 12
     },
     {
       "login": "bl4ckf0xk",
@@ -310,9 +346,12 @@
         "Assembly",
         "TypeScript"
       ],
+      "location_verified": true,
       "score": 19,
       "github_url": "https://github.com/bl4ckf0xk",
-      "rank": 13
+      "rank": 13,
+      "previous_score": 19,
+      "previous_rank": 13
     },
     {
       "login": "thidaskaveesha",
@@ -334,9 +373,12 @@
         "JavaScript",
         "C#"
       ],
+      "location_verified": true,
       "score": 16,
       "github_url": "https://github.com/thidaskaveesha",
-      "rank": 14
+      "rank": 14,
+      "previous_score": 16,
+      "previous_rank": 14
     },
     {
       "login": "randil-h",
@@ -358,9 +400,12 @@
         "Java",
         "Jupyter Notebook"
       ],
+      "location_verified": false,
       "score": 14,
       "github_url": "https://github.com/randil-h",
-      "rank": 15
+      "rank": 15,
+      "previous_score": 14,
+      "previous_rank": 15
     },
     {
       "login": "chapayev0",
@@ -382,9 +427,12 @@
         "PHP",
         "JavaScript"
       ],
+      "location_verified": false,
       "score": 12,
       "github_url": "https://github.com/chapayev0",
-      "rank": 16
+      "rank": 16,
+      "previous_score": 12,
+      "previous_rank": 16
     },
     {
       "login": "Bl4ke100",
@@ -406,9 +454,12 @@
         "HTML",
         "TypeScript"
       ],
+      "location_verified": false,
       "score": 12,
       "github_url": "https://github.com/Bl4ke100",
-      "rank": 17
+      "rank": 17,
+      "previous_score": 12,
+      "previous_rank": 17
     },
     {
       "login": "abdrhxyii",
@@ -430,9 +481,12 @@
         "JavaScript",
         "C#"
       ],
+      "location_verified": true,
       "score": 5,
       "github_url": "https://github.com/abdrhxyii",
-      "rank": 18
+      "rank": 18,
+      "previous_score": 5,
+      "previous_rank": 18
     },
     {
       "login": "AKMJafran",
@@ -454,9 +508,12 @@
         "Java",
         "CSS"
       ],
+      "location_verified": false,
       "score": 3,
       "github_url": "https://github.com/AKMJafran",
-      "rank": 19
+      "rank": 19,
+      "previous_score": 3,
+      "previous_rank": 19
     },
     {
       "login": "dhanushka-sys",
@@ -476,9 +533,12 @@
       "top_languages": [
         "TypeScript"
       ],
+      "location_verified": false,
       "score": 2,
       "github_url": "https://github.com/dhanushka-sys",
-      "rank": 20
+      "rank": 20,
+      "previous_score": 2,
+      "previous_rank": 20
     },
     {
       "login": "Perera-KD",
@@ -496,9 +556,12 @@
       "public_repos": 2,
       "repos_contributed_to": 3,
       "top_languages": [],
+      "location_verified": false,
       "score": 2,
       "github_url": "https://github.com/Perera-KD",
-      "rank": 21
+      "rank": 21,
+      "previous_score": 2,
+      "previous_rank": 21
     },
     {
       "login": "subatheesan-k",
@@ -520,9 +583,12 @@
         "Python",
         "JavaScript"
       ],
+      "location_verified": true,
       "score": 1,
       "github_url": "https://github.com/subatheesan-k",
-      "rank": 22
+      "rank": 22,
+      "previous_score": 1,
+      "previous_rank": 22
     },
     {
       "login": "SLUICEPRJCT",
@@ -542,9 +608,12 @@
       "top_languages": [
         "Python"
       ],
+      "location_verified": false,
       "score": 0,
       "github_url": "https://github.com/SLUICEPRJCT",
-      "rank": 23
+      "rank": 23,
+      "previous_score": 0,
+      "previous_rank": 23
     },
     {
       "login": "prasadrandombage",
@@ -564,9 +633,12 @@
       "top_languages": [
         "PHP"
       ],
+      "location_verified": false,
       "score": 0,
       "github_url": "https://github.com/prasadrandombage",
-      "rank": 24
+      "rank": 24,
+      "previous_score": 0,
+      "previous_rank": 24
     },
     {
       "login": "mihos",
@@ -584,9 +656,12 @@
       "public_repos": 1,
       "repos_contributed_to": 0,
       "top_languages": [],
+      "location_verified": true,
       "score": 0,
       "github_url": "https://github.com/mihos",
-      "rank": 25
+      "rank": 25,
+      "previous_score": 0,
+      "previous_rank": 25
     }
   ]
 }
