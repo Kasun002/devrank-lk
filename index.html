@@ -721,9 +721,48 @@
         </div>
       </div>
 
-      <div class="disclaimer-note" style="margin-bottom: 40px; text-align: center; color: var(--muted); font-size: 13px; line-height: 1.6; max-width: 600px; margin-inline: auto; padding: 16px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid var(--border);">
-        <strong>Just for fun!</strong><br>
-        There is no objective way to "rank" developers. Every developer has a different workflow, tech stack, and focus area. If you are lower on this board, it doesn't mean you are a bad developer—it just means your open-source style is different. Happy coding!
+      <style>
+        .disclaimer-wrapper {
+          margin: 0 auto 40px;
+          max-width: 600px;
+          background: rgba(255,255,255,0.03);
+          border-radius: 8px;
+          border: 1px solid var(--border);
+          overflow: hidden;
+          transition: background 0.3s;
+        }
+        .disclaimer-wrapper:hover {
+          background: rgba(255,255,255,0.07);
+        }
+        .disclaimer-title {
+          padding: 12px;
+          text-align: center;
+          color: var(--muted);
+          font-size: 13px;
+          font-weight: bold;
+          cursor: pointer;
+        }
+        .disclaimer-content {
+          max-height: 0;
+          opacity: 0;
+          padding: 0 16px;
+          text-align: center;
+          color: var(--muted);
+          font-size: 13px;
+          line-height: 1.6;
+          transition: all 0.4s ease;
+        }
+        .disclaimer-wrapper:hover .disclaimer-content {
+          max-height: 120px;
+          opacity: 1;
+          padding: 0 16px 16px;
+        }
+      </style>
+      <div class="disclaimer-wrapper">
+        <div class="disclaimer-title">Just for fun! (Hoverr...)</div>
+        <div class="disclaimer-content">
+          There is no objective way to "rank" developers. Every developer has a different workflow, tech stack, and focus area. If you are lower on this board, it doesn't mean you are a bad developer—it just means your open-source style is different. Happy coding!
+        </div>
       </div>
     </header>
 
