@@ -1,4 +1,4 @@
-# 🇱🇰 GitHub Sri Lanka — Developer Rankings
+# GitHub Sri Lanka — Developer Rankings 🇱🇰 
 
 A weekly-updated leaderboard of Sri Lankan GitHub developers, ranked by open-source activity.
 
@@ -10,6 +10,8 @@ A weekly-updated leaderboard of Sri Lankan GitHub developers, ranked by open-sou
 
 > [!NOTE]  
 > **Live site →** [devrank-lk](https://ktauchathuranga.github.io/devrank-lk/)
+> 
+> **Disclaimer:** There is no objective way to "rank" developers. Every developer has a different workflow, tech stack, and focus area. If you are lower on this board, it doesn't mean you are a bad developer—it just means your open-source style is different. This leaderboard is just for fun! Happy coding!
 
 ---
 
