@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GitHub Sri Lanka — Developer Rankings</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=The+Girl+Next+Door&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #0a0a0f;
@@ -20,8 +20,9 @@
       --silver: #94a3b8;
       --bronze: #cd7c3d;
       --green: #22c55e;
-      --font-display: 'The Girl Next Door', cursive;
-      --font-mono: 'JetBrains Mono', monospace;
+      --font-display: 'Nunito', sans-serif;
+      --font-heading: 'Nunito', sans-serif;
+      --font-mono: 'DM Mono', monospace;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -92,6 +93,7 @@
     }
 
     h1 {
+      font-family: var(--font-heading);
       font-size: clamp(36px, 6vw, 72px);
       font-weight: 800;
       letter-spacing: -0.03em;
@@ -101,7 +103,7 @@
 
     h1 .line2 {
       display: block;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
