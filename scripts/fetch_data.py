@@ -102,6 +102,12 @@ def fetch_user_stats(login):
     followers = user["followers"]["totalCount"]
     score = (commits * 3) + (prs * 5) + (issues * 2) + (total_stars * 4) + (followers * 1)
 
+    SL_KEYWORDS = ["sri lanka", "colombo", "kandy", "galle", "matara", "negombo", "jaffna", "trincomalee", "lk", "ceylon", "sl"]
+    location_str = (user["location"] or "").lower()
+    location_verified = any(k in location_str for k in SL_KEYWORDS)
+    if not location_verified:
+        print(f"{login} has an unverified location: '{user['location'] or 'None'}'")
+
     return {
         "login": user["login"],
         "name": user["name"] or user["login"],
@@ -118,6 +124,7 @@ def fetch_user_stats(login):
         "public_repos": user["repositories"]["totalCount"],
         "repos_contributed_to": contributions["totalRepositoriesWithContributedCommits"],
         "top_languages": top_languages,
+        "location_verified": location_verified,
         "score": score,
         "github_url": f"https://github.com/{user['login']}",
     }
@@ -128,6 +135,17 @@ def main():
     users_path = os.path.join(os.path.dirname(__file__), "..", "data", "users.json")
     with open(users_path, "r") as f:
         user_list = json.load(f)
+
+    out_path = os.path.join(os.path.dirname(__file__), "..", "data", "rankings.json")
+    prev_scores = {}
+    if os.path.exists(out_path):
+        with open(out_path, "r") as f:
+            try:
+                old = json.load(f)
+                for u in old.get("rankings", []):
+                    prev_scores[u["login"]] = {"score": u["score"], "rank": u["rank"]}
+            except Exception:
+                pass
 
     print(f"Fetching stats for {len(user_list)} users...")
 
@@ -148,6 +166,33 @@ def main():
     for i, user in enumerate(rankings):
         user["score"] = round((user["score"] / max_score) * 1000)
         user["rank"] = i + 1
+        prev = prev_scores.get(user["login"], {})
+        if prev:
+            user["previous_score"] = prev.get("score")
+            user["previous_rank"] = prev.get("rank")
+        else:
+            user["previous_score"] = None
+            user["previous_rank"] = None
+
+    print("Generating badges...")
+    badges_dir = os.path.join(os.path.dirname(__file__), "..", "badges")
+    os.makedirs(badges_dir, exist_ok=True)
+    
+    for user in rankings:
+        rank = user["rank"]
+        if rank == 1: color = "ffd700"      # Gold
+        elif rank == 2: color = "c0c0c0"    # Silver
+        elif rank == 3: color = "cd7f32"    # Bronze
+        else: color = "10b981"              # Green for others
+
+        url = f"https://img.shields.io/badge/DevRank--LK-%23{rank}-{color}?style=flat-square"
+        try:
+            r = requests.get(url, timeout=5)
+            if r.status_code == 200:
+                with open(os.path.join(badges_dir, f"{user['login']}.svg"), "w", encoding="utf-8") as bf:
+                    bf.write(r.text)
+        except Exception as e:
+            print(f"  Failed badge for {user['login']}: {e}")
 
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -155,7 +200,6 @@ def main():
         "rankings": rankings,
     }
 
-    out_path = os.path.join(os.path.dirname(__file__), "..", "data", "rankings.json")
     with open(out_path, "w") as f:
         json.dump(output, f, indent=2)
 

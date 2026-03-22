@@ -428,6 +428,110 @@
       from { opacity: 0; transform: translateY(8px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
+    /* ── Trends ── */
+    .trend-indicator {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .trend-up { color: #10b981; background: rgba(16,185,129,0.1); }
+    .trend-down { color: #ef4444; background: rgba(239,68,68,0.1); }
+    .trend-same { color: var(--muted); background: rgba(96,96,160,0.1); }
+    .trend-new { color: var(--accent2); background: rgba(139,92,246,0.1); font-size: 9px; }
+
+    /* ── Modal ── */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 20px;
+    }
+    .modal-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border-bright);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 480px;
+      padding: 32px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-backdrop.show .modal-box {
+      transform: translateY(0);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-header {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .modal-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--border-bright);
+      background: var(--border);
+    }
+    .modal-name { font-size: 24px; font-weight: 800; font-family: var(--font-heading); margin-bottom: 4px; line-height: 1.1; }
+    .modal-login { color: var(--muted); font-family: var(--font-mono); font-size: 13px; }
+    .modal-bio { margin-bottom: 24px; font-size: 14px; line-height: 1.5; color: var(--text); }
+    .modal-meta { display: flex; gap: 12px; margin-bottom: 24px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+    .modal-meta-item { display: flex; align-items: center; gap: 4px; }
+    
+    .metric-row { margin-bottom: 12px; }
+    .metric-top { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; margin-bottom: 6px; text-transform: uppercase; color: var(--muted); }
+    .metric-val { color: var(--text); font-weight: 700; }
+    .metric-bar-bg { background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow: hidden; }
+    .metric-bar-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.6s ease; }
+    
+    .modal-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--border-bright);
+      color: var(--text);
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-top: 32px;
+      transition: background 0.2s;
+    }
+    .modal-btn:hover { background: #3e3e5e; }
   </style>
 </head>
 <body>
@@ -503,9 +607,17 @@
 
 </div>
 
+<div class="modal-backdrop" id="user-modal" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
 <script>
   let allUsers = [];
   let sortKey = 'score';
+  let maxMetrics = { commits: 1, prs: 1, stars: 1, score: 1 };
 
   const medals = ['🥇', '🥈', '🥉'];
 
@@ -525,14 +637,24 @@
       .map(l => `<span class="lang-tag">${l}</span>`)
       .join('');
 
+    let trendHtml = '';
+    if (user.previous_rank === undefined || user.previous_rank === null) {
+      trendHtml = `<span class="trend-indicator trend-new">NEW</span>`;
+    } else {
+      const diff = user.previous_rank - rank;
+      if (diff > 0) trendHtml = `<span class="trend-indicator trend-up">▲ ${diff}</span>`;
+      else if (diff < 0) trendHtml = `<span class="trend-indicator trend-down">▼ ${Math.abs(diff)}</span>`;
+      else trendHtml = `<span class="trend-indicator trend-same">—</span>`;
+    }
+
     return `
-      <a class="user-card ${rankClass}" href="${user.github_url}" target="_blank"
+      <div class="user-card ${rankClass}" onclick="openModal('${user.login}')"
          style="animation-delay: ${delay}ms">
         <div class="rank-num">${medalHtml || '#' + rank}</div>
         <div class="user-info">
           <img class="avatar" src="${user.avatar_url}" alt="${user.login}" loading="lazy" />
           <div class="user-details">
-            <div class="user-name">${user.name || user.login}</div>
+            <div class="user-name">${user.name || user.login} ${trendHtml}</div>
             <div class="user-login">@${user.login}</div>
             <div class="user-langs">${langs}</div>
           </div>
@@ -553,7 +675,7 @@
           <div class="val">${fmt(user.prs_this_year)}</div>
           <div class="lbl">prs</div>
         </div>
-      </a>
+      </div>
     `;
   }
 
@@ -598,11 +720,70 @@
   // Search
   document.getElementById('search').addEventListener('input', sortAndFilter);
 
+  function openModal(login) {
+    const user = allUsers.find(u => u.login === login);
+    if (!user) return;
+    
+    document.getElementById('modal-content').innerHTML = `
+      <div class="modal-header">
+        <img class="modal-avatar" src="${user.avatar_url}" alt="${user.login}">
+        <div>
+          <div class="modal-name">${user.name || user.login}</div>
+          <div class="modal-login">@${user.login}</div>
+        </div>
+      </div>
+      ${user.bio ? `<div class="modal-bio">${user.bio}</div>` : ''}
+      <div class="modal-meta">
+        ${user.company ? `<div class="modal-meta-item">🏢 ${user.company}</div>` : ''}
+        ${user.location ? `<div class="modal-meta-item">📍 ${user.location}</div>` : ''}
+        ${user.website ? `<div class="modal-meta-item">🔗 <a href="${user.website.startsWith('http') ? user.website : 'https://'+user.website}" target="_blank" style="color:var(--accent); text-decoration:none;">Website</a></div>` : ''}
+      </div>
+      
+      <div class="metric-row">
+        <div class="metric-top"><span>Score</span><span class="metric-val" style="color:var(--accent)">${fmt(user.score)}</span></div>
+        <div class="metric-bar-bg"><div class="metric-bar-fill" style="width: ${(user.score / maxMetrics.score) * 100}%"></div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric-top"><span>Commits</span><span class="metric-val">${fmt(user.commits_this_year)}</span></div>
+        <div class="metric-bar-bg"><div class="metric-bar-fill" style="width: ${(user.commits_this_year / maxMetrics.commits) * 100}%; background: var(--accent2)"></div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric-top"><span>Pull Requests</span><span class="metric-val">${fmt(user.prs_this_year)}</span></div>
+        <div class="metric-bar-bg"><div class="metric-bar-fill" style="width: ${(user.prs_this_year / maxMetrics.prs) * 100}%; background: var(--gold)"></div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric-top"><span>Stars</span><span class="metric-val">${fmt(user.total_stars)}</span></div>
+        <div class="metric-bar-bg"><div class="metric-bar-fill" style="width: ${(user.total_stars / maxMetrics.stars) * 100}%; background: var(--green)"></div></div>
+      </div>
+      
+      <a href="${user.github_url}" target="_blank" class="modal-btn">View on GitHub</a>
+    `;
+    
+    document.getElementById('user-modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (e && e.target !== e.currentTarget && e.target.id !== 'user-modal') return;
+    document.getElementById('user-modal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
   // Load data
   fetch('./data/rankings.json')
     .then(r => r.json())
     .then(data => {
       allUsers = data.rankings || [];
+      if (allUsers.length) {
+        maxMetrics.commits = Math.max(...allUsers.map(u => u.commits_this_year)) || 1;
+        maxMetrics.prs = Math.max(...allUsers.map(u => u.prs_this_year)) || 1;
+        maxMetrics.stars = Math.max(...allUsers.map(u => u.total_stars)) || 1;
+        maxMetrics.score = Math.max(...allUsers.map(u => u.score)) || 1;
+      }
 
       // Stats bar
       document.getElementById('stat-devs').textContent = allUsers.length;

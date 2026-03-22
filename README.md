@@ -69,6 +69,18 @@ score = round((raw / max_raw) × 1000)
 
 ---
 
+## Display Your Rank Badge
+
+Developers on the leaderboard can embed a dynamic SVG badge in their GitHub profile `README.md` or personal site:
+
+```markdown
+[![DevRank-LK](https://ktauchathuranga.github.io/devrank-lk/badges/<your-username>.svg)](https://ktauchathuranga.github.io/devrank-lk/)
+```
+
+Make sure to replace `<your-username>` with your exact GitHub handle!
+
+---
+
 ## Setup (for repo owners)
 
 ### 1. Create a GitHub Personal Access Token
