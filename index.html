@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GitHub Sri Lanka — Developer Rankings</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
       --bg: #0a0a0f;
@@ -25,7 +28,11 @@
       --font-mono: 'DM Mono', monospace;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       background: var(--bg);
@@ -57,7 +64,7 @@
       transform: translateX(-50%);
       width: 800px;
       height: 400px;
-      background: radial-gradient(ellipse, rgba(255,107,53,0.08) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -80,8 +87,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255,107,53,0.1);
-      border: 1px solid rgba(255,107,53,0.25);
+      background: rgba(255, 107, 53, 0.1);
+      border: 1px solid rgba(255, 107, 53, 0.25);
       border-radius: 100px;
       padding: 6px 16px;
       font-family: var(--font-mono);
@@ -169,8 +176,13 @@
       transition: border-color 0.2s;
     }
 
-    .search-box::placeholder { color: var(--muted); }
-    .search-box:focus { border-color: var(--accent); }
+    .search-box::placeholder {
+      color: var(--muted);
+    }
+
+    .search-box:focus {
+      border-color: var(--accent);
+    }
 
     .sort-btn {
       background: var(--surface);
@@ -186,7 +198,8 @@
       letter-spacing: 0.05em;
     }
 
-    .sort-btn:hover, .sort-btn.active {
+    .sort-btn:hover,
+    .sort-btn.active {
       border-color: var(--accent);
       color: var(--accent);
     }
@@ -207,11 +220,17 @@
     }
 
     @media (max-width: 680px) {
-      .table-header { display: none; }
+      .table-header {
+        display: none;
+      }
     }
 
     /* ── Cards ── */
-    #rankings-list { display: flex; flex-direction: column; gap: 6px; }
+    #rankings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
     .user-card {
       display: grid;
@@ -235,9 +254,20 @@
     }
 
     /* Top 3 special treatment */
-    .user-card.rank-1 { border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.04); }
-    .user-card.rank-2 { border-color: rgba(148,163,184,0.35); background: rgba(148,163,184,0.03); }
-    .user-card.rank-3 { border-color: rgba(205,124,61,0.4); background: rgba(205,124,61,0.04); }
+    .user-card.rank-1 {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.04);
+    }
+
+    .user-card.rank-2 {
+      border-color: rgba(148, 163, 184, 0.35);
+      background: rgba(148, 163, 184, 0.03);
+    }
+
+    .user-card.rank-3 {
+      border-color: rgba(205, 124, 61, 0.4);
+      background: rgba(205, 124, 61, 0.04);
+    }
 
     /* Rank number */
     .rank-num {
@@ -248,9 +278,17 @@
       font-family: var(--font-mono);
     }
 
-    .rank-1 .rank-num { color: var(--gold); }
-    .rank-2 .rank-num { color: var(--silver); }
-    .rank-3 .rank-num { color: var(--bronze); }
+    .rank-1 .rank-num {
+      color: var(--gold);
+    }
+
+    .rank-2 .rank-num {
+      color: var(--silver);
+    }
+
+    .rank-3 .rank-num {
+      color: var(--bronze);
+    }
 
     .rank-medal {
       font-size: 18px;
@@ -275,7 +313,9 @@
       background: var(--border);
     }
 
-    .user-details { min-width: 0; }
+    .user-details {
+      min-width: 0;
+    }
 
     .user-name {
       font-size: 15px;
@@ -302,8 +342,8 @@
     .lang-tag {
       font-family: var(--font-mono);
       font-size: 9px;
-      background: rgba(139,92,246,0.12);
-      border: 1px solid rgba(139,92,246,0.2);
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.2);
       color: var(--accent2);
       border-radius: 4px;
       padding: 1px 6px;
@@ -334,7 +374,9 @@
     }
 
     /* Progress bar on commits */
-    .commits-col { position: relative; }
+    .commits-col {
+      position: relative;
+    }
 
     /* Mobile card layout */
     @media (max-width: 680px) {
@@ -342,9 +384,18 @@
         grid-template-columns: 48px 1fr;
         grid-template-rows: auto auto;
       }
-      .stat-col { display: none; }
-      .score-col { display: block; }
-      .stat-col .lbl { display: block; }
+
+      .stat-col {
+        display: none;
+      }
+
+      .score-col {
+        display: block;
+      }
+
+      .stat-col .lbl {
+        display: block;
+      }
     }
 
     /* ── Updated time ── */
@@ -356,7 +407,9 @@
       padding: 40px 0 16px;
     }
 
-    .updated-time span { color: var(--green); }
+    .updated-time span {
+      color: var(--green);
+    }
 
     /* ── Join CTA ── */
     .join-section {
@@ -396,7 +449,10 @@
       transition: opacity 0.2s, transform 0.15s;
     }
 
-    .join-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .join-btn:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
 
     /* ── Empty / Loading ── */
     .empty-state {
@@ -408,7 +464,8 @@
     }
 
     .spinner {
-      width: 32px; height: 32px;
+      width: 32px;
+      height: 32px;
       border: 2px solid var(--border-bright);
       border-top-color: var(--accent);
       border-radius: 50%;
@@ -416,7 +473,11 @@
       margin: 0 auto 16px;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
     /* ── Animate in ── */
     .user-card {
@@ -425,8 +486,15 @@
     }
 
     @keyframes fadeSlideIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ── Trends ── */
@@ -442,10 +510,27 @@
       margin-left: 8px;
       vertical-align: middle;
     }
-    .trend-up { color: #10b981; background: rgba(16,185,129,0.1); }
-    .trend-down { color: #ef4444; background: rgba(239,68,68,0.1); }
-    .trend-same { color: var(--muted); background: rgba(96,96,160,0.1); }
-    .trend-new { color: var(--accent2); background: rgba(139,92,246,0.1); font-size: 9px; }
+
+    .trend-up {
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .trend-down {
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .trend-same {
+      color: var(--muted);
+      background: rgba(96, 96, 160, 0.1);
+    }
+
+    .trend-new {
+      color: var(--accent2);
+      background: rgba(139, 92, 246, 0.1);
+      font-size: 9px;
+    }
 
     /* ── Modal ── */
     .modal-backdrop {
@@ -462,10 +547,12 @@
       transition: opacity 0.3s ease;
       padding: 20px;
     }
+
     .modal-backdrop.show {
       opacity: 1;
       pointer-events: auto;
     }
+
     .modal-box {
       background: var(--surface);
       border: 1px solid var(--border-bright);
@@ -477,9 +564,11 @@
       transform: translateY(20px);
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     .modal-backdrop.show .modal-box {
       transform: translateY(0);
     }
+
     .modal-close {
       position: absolute;
       top: 16px;
@@ -493,12 +582,17 @@
       padding: 4px;
       transition: color 0.2s;
     }
-    .modal-close:hover { color: var(--text); }
+
+    .modal-close:hover {
+      color: var(--text);
+    }
+
     .modal-header {
       display: flex;
       gap: 16px;
       margin-bottom: 24px;
     }
+
     .modal-avatar {
       width: 64px;
       height: 64px;
@@ -506,18 +600,76 @@
       border: 2px solid var(--border-bright);
       background: var(--border);
     }
-    .modal-name { font-size: 24px; font-weight: 800; font-family: var(--font-heading); margin-bottom: 4px; line-height: 1.1; }
-    .modal-login { color: var(--muted); font-family: var(--font-mono); font-size: 13px; }
-    .modal-bio { margin-bottom: 24px; font-size: 14px; line-height: 1.5; color: var(--text); }
-    .modal-meta { display: flex; gap: 12px; margin-bottom: 24px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
-    .modal-meta-item { display: flex; align-items: center; gap: 4px; }
-    
-    .metric-row { margin-bottom: 12px; }
-    .metric-top { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; margin-bottom: 6px; text-transform: uppercase; color: var(--muted); }
-    .metric-val { color: var(--text); font-weight: 700; }
-    .metric-bar-bg { background: rgba(255,255,255,0.05); height: 6px; border-radius: 3px; overflow: hidden; }
-    .metric-bar-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.6s ease; }
-    
+
+    .modal-name {
+      font-size: 24px;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      margin-bottom: 4px;
+      line-height: 1.1;
+    }
+
+    .modal-login {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .modal-bio {
+      margin-bottom: 24px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .modal-meta {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-size: 12px;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+
+    .modal-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .metric-row {
+      margin-bottom: 12px;
+    }
+
+    .metric-top {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .metric-val {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .metric-bar-bg {
+      background: rgba(255, 255, 255, 0.05);
+      height: 6px;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .metric-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px;
+      transition: width 0.6s ease;
+    }
+
     .modal-btn {
       display: block;
       width: 100%;
@@ -531,123 +683,128 @@
       margin-top: 32px;
       transition: background 0.2s;
     }
-    .modal-btn:hover { background: #3e3e5e; }
+
+    .modal-btn:hover {
+      background: #3e3e5e;
+    }
   </style>
 </head>
+
 <body>
-<div class="wrap">
+  <div class="wrap">
 
-  <!-- Header -->
-  <header>
-    <!-- <div class="flag-badge">🇱🇰 Sri Lanka</div> -->
-    <h1>
-      GitHub Rankings
-      <span class="line2">Sri Lanka</span>
-    </h1>
-    <p class="subtitle">Top developers ranked by open-source activity · Updated weekly</p>
+    <!-- Header -->
+    <header>
+      <!-- <div class="flag-badge">🇱🇰 Sri Lanka</div> -->
+      <h1>
+        GitHub Rankings
+        <span class="line2">Sri Lanka</span>
+      </h1>
+      <p class="subtitle">Top developers ranked by open-source activity · Updated weekly</p>
 
-    <div class="stats-bar" id="stats-bar">
-      <div class="stat-item">
-        <span class="stat-value" id="stat-devs">—</span>
-        <span class="stat-label">Developers</span>
+      <div class="stats-bar" id="stats-bar">
+        <div class="stat-item">
+          <span class="stat-value" id="stat-devs">—</span>
+          <span class="stat-label">Developers</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-commits">—</span>
+          <span class="stat-label">Total Commits (yr)</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-stars">—</span>
+          <span class="stat-label">Total Stars</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-prs">—</span>
+          <span class="stat-label">Total PRs (yr)</span>
+        </div>
       </div>
-      <div class="stat-item">
-        <span class="stat-value" id="stat-commits">—</span>
-        <span class="stat-label">Total Commits (yr)</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value" id="stat-stars">—</span>
-        <span class="stat-label">Total Stars</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value" id="stat-prs">—</span>
-        <span class="stat-label">Total PRs (yr)</span>
+    </header>
+
+    <!-- Filters -->
+    <div class="filters">
+      <input class="search-box" type="text" id="search" placeholder="Search developer..." />
+      <button class="sort-btn active" data-sort="score">Score</button>
+      <button class="sort-btn" data-sort="commits">Commits</button>
+      <button class="sort-btn" data-sort="stars">Stars</button>
+      <button class="sort-btn" data-sort="prs">PRs</button>
+    </div>
+
+    <!-- Table header -->
+    <div class="table-header">
+      <span>#</span>
+      <span>Developer</span>
+      <span style="text-align:right">Score</span>
+      <span style="text-align:right">Commits</span>
+      <span style="text-align:right">Stars</span>
+      <span style="text-align:right">PRs</span>
+    </div>
+
+    <!-- Rankings -->
+    <div id="rankings-list">
+      <div class="empty-state">
+        <div class="spinner"></div>
+        Loading rankings...
       </div>
     </div>
-  </header>
 
-  <!-- Filters -->
-  <div class="filters">
-    <input class="search-box" type="text" id="search" placeholder="Search developer..." />
-    <button class="sort-btn active" data-sort="score">Score</button>
-    <button class="sort-btn" data-sort="commits">Commits</button>
-    <button class="sort-btn" data-sort="stars">Stars</button>
-    <button class="sort-btn" data-sort="prs">PRs</button>
+    <!-- Updated time -->
+    <p class="updated-time" id="updated-time"></p>
+
+    <!-- Join CTA -->
+    <div class="join-section">
+      <h3>Are you a Sri Lankan developer?</h3>
+      <p>Add yourself to the rankings by submitting a pull request to users.json</p>
+      <a class="join-btn" href="https://github.com/ktauchathuranga/devrank-lk/blob/main/data/users.json"
+        target="_blank">
+        ＋ Add yourself
+      </a>
+    </div>
+
   </div>
 
-  <!-- Table header -->
-  <div class="table-header">
-    <span>#</span>
-    <span>Developer</span>
-    <span style="text-align:right">Score</span>
-    <span style="text-align:right">Commits</span>
-    <span style="text-align:right">Stars</span>
-    <span style="text-align:right">PRs</span>
-  </div>
-
-  <!-- Rankings -->
-  <div id="rankings-list">
-    <div class="empty-state">
-      <div class="spinner"></div>
-      Loading rankings...
+  <div class="modal-backdrop" id="user-modal" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modal-content"></div>
     </div>
   </div>
 
-  <!-- Updated time -->
-  <p class="updated-time" id="updated-time"></p>
+  <script>
+    let allUsers = [];
+    let sortKey = 'score';
+    let maxMetrics = { commits: 1, prs: 1, stars: 1, score: 1 };
 
-  <!-- Join CTA -->
-  <div class="join-section">
-    <h3>Are you a Sri Lankan developer?</h3>
-    <p>Add yourself to the rankings by submitting a pull request to users.json</p>
-    <a class="join-btn" href="https://github.com/ktauchathuranga/devrank-lk/blob/main/data/users.json" target="_blank">
-      ＋ Add yourself
-    </a>
-  </div>
+    const medals = ['🥇', '🥈', '🥉'];
 
-</div>
-
-<div class="modal-backdrop" id="user-modal" onclick="closeModal(event)">
-  <div class="modal-box" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <div id="modal-content"></div>
-  </div>
-</div>
-
-<script>
-  let allUsers = [];
-  let sortKey = 'score';
-  let maxMetrics = { commits: 1, prs: 1, stars: 1, score: 1 };
-
-  const medals = ['🥇', '🥈', '🥉'];
-
-  function fmt(n) {
-    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
-    return n;
-  }
-
-  function renderCard(user, visualRank) {
-    const rank = visualRank;
-    const medalHtml = rank <= 3 ? `<span class="rank-medal">${medals[rank-1]}</span>` : '';
-    const rankClass = rank <= 3 ? `rank-${rank}` : '';
-    const delay = Math.min(rank * 30, 600);
-
-    const langs = (user.top_languages || [])
-      .slice(0, 3)
-      .map(l => `<span class="lang-tag">${l}</span>`)
-      .join('');
-
-    let trendHtml = '';
-    if (user.previous_rank === undefined || user.previous_rank === null) {
-      trendHtml = `<span class="trend-indicator trend-new">NEW</span>`;
-    } else {
-      const diff = user.previous_rank - rank;
-      if (diff > 0) trendHtml = `<span class="trend-indicator trend-up">▲ ${diff}</span>`;
-      else if (diff < 0) trendHtml = `<span class="trend-indicator trend-down">▼ ${Math.abs(diff)}</span>`;
-      else trendHtml = `<span class="trend-indicator trend-same">—</span>`;
+    function fmt(n) {
+      if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+      return n;
     }
 
-    return `
+    function renderCard(user, visualRank) {
+      const rank = visualRank;
+      const medalHtml = rank <= 3 ? `<span class="rank-medal">${medals[rank - 1]}</span>` : '';
+      const rankClass = rank <= 3 ? `rank-${rank}` : '';
+      const delay = Math.min(rank * 30, 600);
+
+      const langs = (user.top_languages || [])
+        .slice(0, 3)
+        .map(l => `<span class="lang-tag">${l}</span>`)
+        .join('');
+
+      let trendHtml = '';
+      if (user.previous_rank === undefined || user.previous_rank === null) {
+        trendHtml = `<span class="trend-indicator trend-new">NEW</span>`;
+      } else {
+        const diff = user.previous_rank - rank;
+        if (diff > 0) trendHtml = `<span class="trend-indicator trend-up">▲ ${diff}</span>`;
+        else if (diff < 0) trendHtml = `<span class="trend-indicator trend-down">▼ ${Math.abs(diff)}</span>`;
+        else trendHtml = `<span class="trend-indicator trend-same">—</span>`;
+      }
+
+      return `
       <div class="user-card ${rankClass}" onclick="openModal('${user.login}')"
          style="animation-delay: ${delay}ms">
         <div class="rank-num">${medalHtml || '#' + rank}</div>
@@ -677,67 +834,71 @@
         </div>
       </div>
     `;
-  }
-
-  function render(users) {
-    const list = document.getElementById('rankings-list');
-    if (!users.length) {
-      list.innerHTML = `<div class="empty-state">No developers found.</div>`;
-      return;
     }
-    // Keep original/global rank from dataset when filtering/searching.
-    list.innerHTML = users.map((u, i) => renderCard(u, u.rank || i + 1)).join('');
-  }
 
-  function sortAndFilter() {
-    const q = document.getElementById('search').value.toLowerCase();
-    let filtered = allUsers.filter(u =>
-      (u.name || '').toLowerCase().includes(q) ||
-      u.login.toLowerCase().includes(q)
-    );
+    function render(users) {
+      const list = document.getElementById('rankings-list');
+      if (!users.length) {
+        list.innerHTML = `<div class="empty-state">No developers found.</div>`;
+        return;
+      }
+      // Keep original/global rank from dataset when filtering/searching.
+      list.innerHTML = users.map((u, i) => renderCard(u, u.rank || i + 1)).join('');
+    }
 
-    const sortFns = {
-      score: (a, b) => b.score - a.score,
-      commits: (a, b) => b.commits_this_year - a.commits_this_year,
-      stars: (a, b) => b.total_stars - a.total_stars,
-      prs: (a, b) => b.prs_this_year - a.prs_this_year,
-    };
+    function sortAndFilter() {
+      const q = document.getElementById('search').value.toLowerCase();
+      let filtered = allUsers.filter(u =>
+        (u.name || '').toLowerCase().includes(q) ||
+        u.login.toLowerCase().includes(q)
+      );
 
-    filtered.sort(sortFns[sortKey] || sortFns.score);
-    render(filtered);
-  }
+      const sortFns = {
+        score: (a, b) => b.score - a.score,
+        commits: (a, b) => b.commits_this_year - a.commits_this_year,
+        stars: (a, b) => b.total_stars - a.total_stars,
+        prs: (a, b) => b.prs_this_year - a.prs_this_year,
+      };
 
-  // Sort buttons
-  document.querySelectorAll('.sort-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      sortKey = btn.dataset.sort;
-      sortAndFilter();
+      filtered.sort(sortFns[sortKey] || sortFns.score);
+      render(filtered);
+    }
+
+    // Sort buttons
+    document.querySelectorAll('.sort-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        sortKey = btn.dataset.sort;
+        sortAndFilter();
+      });
     });
-  });
 
-  // Search
-  document.getElementById('search').addEventListener('input', sortAndFilter);
+    // Search
+    document.getElementById('search').addEventListener('input', sortAndFilter);
 
-  function openModal(login) {
-    const userIndex = allUsers.findIndex(u => u.login === login);
-    if (userIndex === -1) return;
-    const user = allUsers[userIndex];
-    
-    // Compare against the person exactly one rank above them
-    const targetUser = userIndex > 0 ? allUsers[userIndex - 1] : user;
-    const pct = (val, target) => target === 0 ? 100 : Math.min(100, (val / target) * 100);
-    
-    document.getElementById('modal-content').innerHTML = `
+    function openModal(login) {
+      const userIndex = allUsers.findIndex(u => u.login === login);
+      if (userIndex === -1) return;
+      const user = allUsers[userIndex];
+
+      // Compare against the person exactly one rank above them
+      const targetUser = userIndex > 0 ? allUsers[userIndex - 1] : user;
+      const pct = (val, target) => target === 0 ? 100 : Math.min(100, (val / target) * 100);
+
+      document.getElementById('modal-content').innerHTML = `
       <div class="modal-header">
         <img class="modal-avatar" src="${user.avatar_url}" alt="${user.login}">
         <div>
-          <div class="modal-n      ${user.bio ? `<div class="modal-bio">${user.bio}</div>` : ''}
+          <div class="modal-name">${user.name || user.login}</div>
+          <div class="modal-login">@${user.login}</div>
+        </div>
+      </div>
+      ${user.bio ? `<div class="modal-bio">${user.bio}</div>` : ''}
       <div class="modal-meta">
         ${user.company ? `<div class="modal-meta-item">${user.company}</div>` : ''}
         ${user.location ? `<div class="modal-meta-item">${user.location}</div>` : ''}
-        ${user.website ? `<div class="modal-meta-item"><a href="${user.website.startsWith('http') ? user.website : 'https://'+user.website}" target="_blank" style="color:var(--accent); text-decoration:none;">Website</a></div>` : ''}
+        ${user.website ? `<div class="modal-meta-item"><a href="${user.website.startsWith('http') ? user.website : 'https://' + user.website}" target="_blank" style="color:var(--accent); text-decoration:none;">Website</a></div>` : ''}
       </div>
       
       <div class="metric-row" style="margin-bottom: 24px;">
@@ -763,62 +924,60 @@
         <div class="metric-bar-bg"><div class="metric-bar-fill" style="width: ${pct(user.total_stars, targetUser.total_stars)}%; background: var(--green)"></div></div>
       </div>
       
-      <a href="${user.github_url}" target="_blank" class="modal-btn">View on GitHub</a>d: var(--green)"></div></div>
-      </div>
-      
       <a href="${user.github_url}" target="_blank" class="modal-btn">View on GitHub</a>
     `;
-    
-    document.getElementById('user-modal').classList.add('show');
-    document.body.style.overflow = 'hidden';
-  }
 
-  function closeModal(e) {
-    if (e && e.target !== e.currentTarget && e.target.id !== 'user-modal') return;
-    document.getElementById('user-modal').classList.remove('show');
-    document.body.style.overflow = '';
-  }
+      document.getElementById('user-modal').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
+    function closeModal(e) {
+      if (e && e.target !== e.currentTarget && e.target.id !== 'user-modal') return;
+      document.getElementById('user-modal').classList.remove('show');
+      document.body.style.overflow = '';
+    }
 
-  // Load data
-  fetch('./data/rankings.json')
-    .then(r => r.json())
-    .then(data => {
-      allUsers = data.rankings || [];
-      if (allUsers.length) {
-        maxMetrics.commits = Math.max(...allUsers.map(u => u.commits_this_year)) || 1;
-        maxMetrics.prs = Math.max(...allUsers.map(u => u.prs_this_year)) || 1;
-        maxMetrics.stars = Math.max(...allUsers.map(u => u.total_stars)) || 1;
-        maxMetrics.score = Math.max(...allUsers.map(u => u.score)) || 1;
-      }
-
-      // Stats bar
-      document.getElementById('stat-devs').textContent = allUsers.length;
-      document.getElementById('stat-commits').textContent =
-        fmt(allUsers.reduce((s, u) => s + u.commits_this_year, 0));
-      document.getElementById('stat-stars').textContent =
-        fmt(allUsers.reduce((s, u) => s + u.total_stars, 0));
-      document.getElementById('stat-prs').textContent =
-        fmt(allUsers.reduce((s, u) => s + u.prs_this_year, 0));
-
-      // Updated time
-      if (data.generated_at) {
-        const d = new Date(data.generated_at);
-        const timeStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        document.getElementById('updated-time').innerHTML =
-          `Last updated: <span>${timeStr}</span>`;
-      }
-
-      sortAndFilter();
-    })
-    .catch(err => {
-      console.error(err);
-      document.getElementById('rankings-list').innerHTML =
-        `<div class="empty-state">Failed to load rankings. Try again later.</div>`;
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
     });
-</script>
+
+    // Load data
+    fetch('./data/rankings.json')
+      .then(r => r.json())
+      .then(data => {
+        allUsers = data.rankings || [];
+        if (allUsers.length) {
+          maxMetrics.commits = Math.max(...allUsers.map(u => u.commits_this_year)) || 1;
+          maxMetrics.prs = Math.max(...allUsers.map(u => u.prs_this_year)) || 1;
+          maxMetrics.stars = Math.max(...allUsers.map(u => u.total_stars)) || 1;
+          maxMetrics.score = Math.max(...allUsers.map(u => u.score)) || 1;
+        }
+
+        // Stats bar
+        document.getElementById('stat-devs').textContent = allUsers.length;
+        document.getElementById('stat-commits').textContent =
+          fmt(allUsers.reduce((s, u) => s + u.commits_this_year, 0));
+        document.getElementById('stat-stars').textContent =
+          fmt(allUsers.reduce((s, u) => s + u.total_stars, 0));
+        document.getElementById('stat-prs').textContent =
+          fmt(allUsers.reduce((s, u) => s + u.prs_this_year, 0));
+
+        // Updated time
+        if (data.generated_at) {
+          const d = new Date(data.generated_at);
+          const timeStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          document.getElementById('updated-time').innerHTML =
+            `Last updated: <span>${timeStr}</span>`;
+        }
+
+        sortAndFilter();
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('rankings-list').innerHTML =
+          `<div class="empty-state">Failed to load rankings. Try again later.</div>`;
+      });
+  </script>
 </body>
+
 </html>
