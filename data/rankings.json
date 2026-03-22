@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-22T22:34:51.951553+00:00",
+  "generated_at": "2026-03-22T22:59:40.795754+00:00",
   "total_users": 25,
   "rankings": [
     {
@@ -14,7 +14,7 @@
       "commits_this_year": 6244,
       "prs_this_year": 242,
       "issues_this_year": 102,
-      "total_stars": 3799,
+      "total_stars": 3800,
       "public_repos": 80,
       "repos_contributed_to": 42,
       "top_languages": [
@@ -38,10 +38,10 @@
       "website": "https://ktauchathuranga.github.io",
       "location": "Sri Lanka",
       "followers": 26,
-      "commits_this_year": 1263,
+      "commits_this_year": 1266,
       "prs_this_year": 135,
       "issues_this_year": 174,
-      "total_stars": 65,
+      "total_stars": 66,
       "public_repos": 67,
       "repos_contributed_to": 48,
       "top_languages": [
@@ -50,7 +50,7 @@
         "Shell"
       ],
       "location_verified": true,
-      "score": 142,
+      "score": 143,
       "github_url": "https://github.com/ktauchathuranga",
       "rank": 2,
       "previous_score": 142,
