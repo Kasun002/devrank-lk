@@ -282,6 +282,13 @@ jobs:
           branch: ${{ steps.parse.outputs.branch }}
           delete-branch: true
 
+      - name: Merge pull request
+        if: steps.parse.outputs.valid == 'true' && steps.update.outputs.changed == 'true' && steps.cpr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --merge
+
       - name: Comment issue with PR and close it
         if: github.event_name == 'issues' && steps.parse.outputs.valid == 'true' && steps.update.outputs.changed == 'true'
         uses: actions/github-script@v7
@@ -289,19 +296,17 @@ jobs:
           ISSUE_NUMBER: ${{ steps.parse.outputs.issue_number }}
           PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
           PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
-          PR_OPERATION: ${{ steps.cpr.outputs.pull-request-operation }}
         with:
           script: |
             const issue_number = Number(process.env.ISSUE_NUMBER);
             const prNumber = process.env.PR_NUMBER;
             const prUrl = process.env.PR_URL;
-            const operation = process.env.PR_OPERATION || "created";
 
             const body = [
-              `Pull request ${operation}: #${prNumber}`,
+              `Pull request #${prNumber} has been created and merged.`,
               prUrl,
               "",
-              "This issue is now closed."
+              "Your username has been added to the rankings. Welcome!"
             ].join("\n");
 
             await github.rest.issues.createComment({
