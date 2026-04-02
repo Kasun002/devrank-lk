@@ -1,0 +1,31 @@
+name: Add yourself to DevRank LK
+description: Submit your GitHub username and a bot will create the PR for you.
+title: "Add @<your-github-username> to DevRank LK"
+labels:
+  - add-user
+body:
+  - type: input
+    id: github_username
+    attributes:
+      label: GitHub username
+      description: Enter your exact GitHub username (not a profile URL).
+      placeholder: your-username
+    validations:
+      required: true
+
+  - type: input
+    id: note
+    attributes:
+      label: Optional note (website, LinkedIn, etc.)
+      description: Optional short text shown with your profile.
+      placeholder: https://your-site.example
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I confirm this is my own GitHub username.
+          required: true

@@ -1,0 +1,319 @@
+name: Intake Users via Form
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+  workflow_dispatch:
+    inputs:
+      github_username:
+        description: GitHub username to add
+        required: true
+        type: string
+      note:
+        description: Optional note (website, LinkedIn, etc.)
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  create-user-pr:
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'add-user'))
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Parse submission
+        id: parse
+        shell: python
+        run: |
+          import json
+          import os
+          import re
+
+          def set_output(name, value):
+              with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+                  fh.write(f"{name}<<__OUT__\\n{value}\\n__OUT__\\n")
+
+          event_name = os.environ["GITHUB_EVENT_NAME"]
+          with open(os.environ["GITHUB_EVENT_PATH"], "r", encoding="utf-8") as f:
+              event = json.load(f)
+
+          username = ""
+          note = ""
+          issue_number = ""
+          issue_author = ""
+          issue_url = ""
+
+          if event_name == "issues":
+              issue = event["issue"]
+              body = issue.get("body") or ""
+              issue_number = str(issue["number"])
+              issue_author = (issue.get("user") or {}).get("login", "")
+              issue_url = issue.get("html_url", "")
+
+              def extract_section(heading):
+                  pattern = rf"^###\\s+{re.escape(heading)}\\s*\\n(.*?)(?=^###\\s+|\\Z)"
+                  match = re.search(pattern, body, flags=re.M | re.S)
+                  if not match:
+                      return ""
+                  return match.group(1).strip()
+
+              username = extract_section("GitHub username")
+              note = extract_section("Optional note (website, LinkedIn, etc.)")
+          else:
+              inputs = event.get("inputs", {})
+              username = inputs.get("github_username", "")
+              note = inputs.get("note", "")
+
+          username = username.strip().lstrip("@")
+          note = note.strip()
+
+          if note == "_No response_":
+              note = ""
+
+          # Keep note single-line in users.json for predictable diffs.
+          note = " ".join(note.split())
+
+          valid = True
+          error = ""
+
+          github_re = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$")
+
+          if not username:
+              valid = False
+              error = "GitHub username is required."
+          elif not github_re.fullmatch(username):
+              valid = False
+              error = (
+                  "Invalid GitHub username format. Use only letters, numbers, and hyphens "
+                  "(max 39 characters, no leading/trailing hyphen)."
+              )
+          elif event_name == "issues" and issue_author and username.lower() != issue_author.lower():
+              valid = False
+              error = (
+                  f"Submitted username '{username}' does not match issue author '{issue_author}'. "
+                  "You can only add yourself."
+              )
+
+          branch_slug = re.sub(r"[^a-z0-9-]+", "-", username.lower()).strip("-") or "user"
+          suffix = issue_number or os.environ.get("GITHUB_RUN_ID", "manual")
+          branch = f"bot/add-user-{branch_slug}-{suffix}"
+
+          source_line = f"- Source issue: #{issue_number}" if issue_number else "- Source: workflow_dispatch"
+          note_line = f"- Optional note: {note}" if note else "- Optional note: (none)"
+          close_line = f"\\nCloses #{issue_number}" if issue_number else ""
+
+          pr_body = "\\n".join([
+              "Automated user submission.",
+              "",
+              source_line,
+              f"- Added GitHub user: @{username}",
+              note_line,
+          ]) + close_line
+
+          set_output("valid", "true" if valid else "false")
+          set_output("error", error)
+          set_output("username", username)
+          set_output("note", note)
+          set_output("branch", branch)
+          set_output("issue_number", issue_number)
+          set_output("issue_url", issue_url)
+          set_output("issue_author", issue_author)
+          set_output("commit_message", f"chore(users): add {username}")
+          set_output("pr_title", f"chore(users): add @{username}")
+          set_output("pr_body", pr_body)
+
+          if not valid:
+              print(f"::warning::{error}")
+
+      - name: Close invalid issue submission
+        if: github.event_name == 'issues' && steps.parse.outputs.valid != 'true'
+        uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBER: ${{ steps.parse.outputs.issue_number }}
+          ERROR_MESSAGE: ${{ steps.parse.outputs.error }}
+        with:
+          script: |
+            const issue_number = Number(process.env.ISSUE_NUMBER);
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              body: [
+                "I could not process this submission automatically.",
+                "",
+                `Reason: ${process.env.ERROR_MESSAGE}`,
+                "",
+                "Please submit again using the Add Yourself issue form and ensure the username matches your GitHub account."
+              ].join("\n")
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              state: "closed"
+            });
+
+
+      - name: Fail invalid manual dispatch input
+        if: github.event_name == 'workflow_dispatch' && steps.parse.outputs.valid != 'true'
+        run: |
+          echo "${{ steps.parse.outputs.error }}"
+          exit 1
+
+      - name: Update users list
+        id: update
+        if: steps.parse.outputs.valid == 'true'
+        shell: python
+        env:
+          USERNAME: ${{ steps.parse.outputs.username }}
+          NOTE: ${{ steps.parse.outputs.note }}
+        run: |
+          import json
+          import os
+
+          def set_output(name, value):
+              with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as fh:
+                  fh.write(f"{name}={value}\\n")
+
+          path = "data/users.json"
+          username = os.environ["USERNAME"].strip()
+          note = os.environ.get("NOTE", "").strip()
+
+          with open(path, "r", encoding="utf-8") as f:
+              raw = f.read()
+
+          users = json.loads(raw)
+          if not isinstance(users, list):
+              raise SystemExit("data/users.json must contain a JSON array.")
+
+          existing_username = ""
+          for item in users:
+              if isinstance(item, dict):
+                  login = str(item.get("github", "")).strip()
+              else:
+                  login = str(item).strip()
+
+              if login.lower() == username.lower():
+                  existing_username = login or username
+                  break
+
+          if existing_username:
+              set_output("changed", "false")
+              set_output("existing_username", existing_username)
+              print(f"User already exists: {existing_username}")
+              raise SystemExit(0)
+
+          new_entry = json.dumps(
+              {"github": username, "note": note},
+              ensure_ascii=False,
+              separators=(", ", ": "),
+          )
+
+          trimmed = raw.rstrip()
+          if not trimmed.endswith("]"):
+              raise SystemExit("data/users.json must end with a closing bracket.")
+
+          before_close = trimmed[:-1].rstrip()
+          if before_close.endswith("["):
+              updated = f"[\\n  {new_entry}\\n]\\n"
+          else:
+              updated = f"{before_close},\\n  {new_entry}\\n]\\n"
+
+          with open(path, "w", encoding="utf-8") as f:
+              f.write(updated)
+
+          set_output("changed", "true")
+          set_output("existing_username", "")
+          print(f"Added user: {username}")
+
+      - name: Close duplicate issue submission
+        if: github.event_name == 'issues' && steps.parse.outputs.valid == 'true' && steps.update.outputs.changed != 'true'
+        uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBER: ${{ steps.parse.outputs.issue_number }}
+          EXISTING_USERNAME: ${{ steps.update.outputs.existing_username }}
+        with:
+          script: |
+            const issue_number = Number(process.env.ISSUE_NUMBER);
+            const existing = process.env.EXISTING_USERNAME;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              body: [
+                `@${existing} is already listed in data/users.json.`,
+                "No new PR was created."
+              ].join("\n")
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              state: "closed"
+            });
+
+      - name: Fail duplicate manual dispatch input
+        if: github.event_name == 'workflow_dispatch' && steps.parse.outputs.valid == 'true' && steps.update.outputs.changed != 'true'
+        run: |
+          echo "User already exists: ${{ steps.update.outputs.existing_username }}"
+          exit 1
+
+      - name: Create pull request
+        id: cpr
+        if: steps.parse.outputs.valid == 'true' && steps.update.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: ${{ steps.parse.outputs.commit_message }}
+          title: ${{ steps.parse.outputs.pr_title }}
+          body: ${{ steps.parse.outputs.pr_body }}
+          branch: ${{ steps.parse.outputs.branch }}
+          delete-branch: true
+
+      - name: Comment issue with PR and close it
+        if: github.event_name == 'issues' && steps.parse.outputs.valid == 'true' && steps.update.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBER: ${{ steps.parse.outputs.issue_number }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
+          PR_OPERATION: ${{ steps.cpr.outputs.pull-request-operation }}
+        with:
+          script: |
+            const issue_number = Number(process.env.ISSUE_NUMBER);
+            const prNumber = process.env.PR_NUMBER;
+            const prUrl = process.env.PR_URL;
+            const operation = process.env.PR_OPERATION || "created";
+
+            const body = [
+              `Pull request ${operation}: #${prNumber}`,
+              prUrl,
+              "",
+              "This issue is now closed."
+            ].join("\n");
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              body,
+            });
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              state: "closed"
+            });

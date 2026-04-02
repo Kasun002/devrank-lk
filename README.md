@@ -49,26 +49,17 @@ score = round((raw / max_raw) × 1000)
 
 ## Add yourself to the rankings
 
-1. Fork this repo
-2. Open [`data/users.json`](data/users.json) and add your entry:
-   - Find the **last line** that starts with `{` (the last person in the list)
-   - Add a **comma** `,` at the end of that line
-   - Then add your entry on a new line **before** the closing `]`
+1. Open the **Add yourself to DevRank LK** issue form:
+   - [Open form](https://github.com/ktauchathuranga/devrank-lk/issues/new?template=add-yourself.yml)
+2. Fill in your exact GitHub username (and optional note)
+3. Submit the issue
+4. A bot will automatically:
+   - Validate your input
+   - Create a PR that only updates `data/users.json`
+   - Close your issue with a PR link
+5. The PR is auto-validated and merged when checks pass
 
-   **Example — before:**
-   ```json
-      { "github": "some-user", "note": "" }
-   ]
-   ```
-   **Example — after:**
-   ```json
-      { "github": "some-user", "note": "" },
-      { "github": "your-github-username", "note": "" }
-   ]
-   ```
-   > **Important:** The comma after the previous entry is required. Without it you will get a JSON syntax error and your PR cannot be merged.
-
-3. Open a Pull Request
+No manual JSON editing is required.
 
 ---
 
@@ -112,7 +103,11 @@ Go to **Actions → Update GitHub Rankings → Run workflow**
 
 ```
 ├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   └── add-yourself.yml      # Contributor intake form
 │   └── workflows/
+│       ├── auto-merge.yml        # Validation + auto-merge for users.json PRs
+│       ├── intake-users.yml      # Builds PRs from issue form submissions
 │       └── update-rankings.yml   # Scheduled GitHub Action
 ├── data/
 │   ├── users.json                # List of registered developers

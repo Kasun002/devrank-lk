@@ -16,63 +16,152 @@ jobs:
     if: github.event.pull_request.user.login != github.repository_owner
 
     steps:
-      - name: Checkout PR code
+      - name: Checkout base branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+
+      - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          path: pr
 
       - name: Verify ONLY users.json was modified
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Fetch the list of changed files for this specific PR using the GitHub CLI
           CHANGED_FILES=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path')
-          
-          # Count how many files were changed
           FILE_COUNT=$(echo "$CHANGED_FILES" | wc -l)
-          
+
           echo "Files changed in this PR:"
           echo "$CHANGED_FILES"
-          
+
           if [ "$FILE_COUNT" -ne 1 ] || [ "$CHANGED_FILES" != "data/users.json" ]; then
-            echo "❌ Error: This PR modifies files other than data/users.json. Manual review required."
+            echo "This PR modifies files other than data/users.json." > /tmp/error.txt
+            echo "❌ $(cat /tmp/error.txt)"
             exit 1
           fi
           echo "✅ File isolation check passed!"
 
-      - name: Validate JSON syntax and structure
+      - name: Validate PR changes
         shell: python
+        env:
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
         run: |
-          import json, sys
-          try:
-              # Attempt to load the file
-              with open("data/users.json", "r") as f:
-                  data = json.load(f)
-              
-              # Rule 1: It must be an array [...]
-              if not isinstance(data, list):
-                  raise ValueError("The JSON file must contain a list array [] at the root.")
-                  
-              seen_usernames = set()
-              
-              # Rule 2: Validation and Duplicate Check
-              for item in data:
-                  if isinstance(item, dict) and "github" not in item:
-                      raise ValueError("Every user object must have a 'github' key.")
-                  
-                  # Extract the username and make it lowercase for a true comparison
-                  username = item["github"].lower() if isinstance(item, dict) else item.lower()
-                  
-                  # Rule 3: Check for duplicates
-                  if username in seen_usernames:
-                      raise ValueError(f"Duplicate username found: {username}. Users can only be added once.")
-                  
-                  seen_usernames.add(username)
-                      
-              print("✅ JSON validation passed!")
-          except Exception as e:
-              print(f"❌ JSON Validation Failed: {e}")
+          import json, sys, os, re
+
+          def fail(msg):
+              print(f"❌ {msg}")
+              with open("/tmp/error.txt", "w") as f:
+                  f.write(msg)
               sys.exit(1)
+
+          pr_author = os.environ["PR_AUTHOR"].lower()
+
+          # Load base (current) users.json
+          try:
+              with open("data/users.json", "r") as f:
+                  base_data = json.load(f)
+          except Exception as e:
+              fail(f"Could not read base users.json: {e}")
+
+          # Load PR (proposed) users.json
+          try:
+              with open("pr/data/users.json", "r") as f:
+                  pr_data = json.load(f)
+          except json.JSONDecodeError as e:
+              fail(f"Invalid JSON syntax: {e}")
+
+          # Must be a JSON array
+          if not isinstance(pr_data, list):
+              fail("users.json must contain a JSON array [] at the root.")
+
+          # Build base lookup
+          base_usernames = set()
+          base_entries = {}
+          for item in base_data:
+              if isinstance(item, dict) and "github" in item:
+                  key = item["github"].strip().lower()
+                  base_usernames.add(key)
+                  base_entries[key] = item
+
+          # Validate each PR entry
+          pr_usernames = set()
+          new_usernames = []
+          allowed_keys = {"github", "note"}
+          github_re = re.compile(r'^[a-zA-Z0-9]([a-zA-Z0-9\-]*[a-zA-Z0-9])?$')
+
+          for i, item in enumerate(pr_data):
+              if not isinstance(item, dict):
+                  fail(f"Entry at index {i} is not a valid JSON object.")
+              if "github" not in item:
+                  fail(f"Entry at index {i} is missing the 'github' key.")
+
+              # Only allow 'github' and 'note' keys
+              extra_keys = set(item.keys()) - allowed_keys
+              if extra_keys:
+                  fail(f"Entry at index {i} has unexpected keys: {', '.join(extra_keys)}. Only 'github' and 'note' are allowed.")
+
+              # Type checks
+              if not isinstance(item["github"], str):
+                  fail(f"Entry at index {i}: 'github' must be a string.")
+              if "note" in item and not isinstance(item["note"], str):
+                  fail(f"Entry at index {i}: 'note' must be a string.")
+
+              username = item["github"].strip()
+
+              # Validate GitHub username format (alphanumeric + hyphens, no spaces)
+              if not github_re.match(username):
+                  fail(
+                      f"Invalid GitHub username: '{username}'. "
+                      "Usernames can only contain alphanumeric characters and hyphens, "
+                      "and cannot start/end with a hyphen or contain spaces."
+                  )
+
+              # GitHub username length limit
+              if len(username) > 39:
+                  fail(f"Username '{username}' exceeds GitHub's 39 character limit.")
+
+              key = username.lower()
+
+              # Check for duplicates
+              if key in pr_usernames:
+                  fail(f"Duplicate username: '{username}'.")
+              pr_usernames.add(key)
+
+              # Track new entries
+              if key not in base_usernames:
+                  new_usernames.append(username)
+
+          # No existing users may be removed
+          removed = base_usernames - pr_usernames
+          if removed:
+              fail(f"Existing users were removed: {', '.join(removed)}. You may only add new users, not remove existing ones.")
+
+          # No modifications to existing entries
+          for item in pr_data:
+              key = item["github"].strip().lower()
+              if key in base_entries and item != base_entries[key]:
+                  fail(f"Existing user '{item['github']}' was modified. You may only add new users, not edit existing entries.")
+
+          # Must add exactly one new user
+          if len(new_usernames) == 0:
+              fail("No new users were added. Nothing to merge.")
+          if len(new_usernames) > 1:
+              fail(f"Only one user can be added per PR. Found {len(new_usernames)} new entries: {', '.join(new_usernames)}")
+
+          # The added username must match the PR author
+          trusted_bots = {"github-actions[bot]"}
+          if pr_author in trusted_bots:
+              print(f"Trusted bot PR ({pr_author}); skipping author/username equality check.")
+          elif new_usernames[0].lower() != pr_author:
+              fail(
+                  f"Added username '{new_usernames[0]}' does not match your GitHub account '{pr_author}'. "
+                  "You can only add yourself to the rankings."
+              )
+
+          print(f"All validation passed. New user: {new_usernames[0]}")
 
       - name: Auto-merge PR
         env:
@@ -81,11 +170,11 @@ jobs:
           echo "All checks passed. Merging PR..."
           gh pr merge ${{ github.event.pull_request.number }} --merge
 
-      - name: Post thank-you comment
+      - name: Post welcome comment
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} --body "🎉 Thank you @${{ github.event.pull_request.user.login }} for adding yourself to the **GitHub Sri Lanka Developer Rankings**!
+          gh pr comment ${{ github.event.pull_request.number }} --body "🎉 Thank you for adding yourself to the **GitHub Sri Lanka Developer Rankings**!
 
           Your entry has been successfully merged.
 
@@ -95,4 +184,26 @@ jobs:
           - Your score is calculated based on your commits, pull requests, issues, stars, and followers from the past 12 months.
 
           Welcome to the community!"
-          
+
+      - name: Post failure comment
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ERROR=""
+          if [ -f /tmp/error.txt ]; then
+            ERROR=$(cat /tmp/error.txt)
+          fi
+
+          gh pr comment ${{ github.event.pull_request.number }} --body "❌ **Auto-merge failed** for this PR.
+
+          ${ERROR:+**Reason:** $ERROR}
+
+          **Rules for adding yourself:**
+          - Only \`data/users.json\` may be modified
+          - You can only **add** yourself — no removing or editing other users
+          - The \`github\` field must be your exact GitHub username (not your display name)
+          - Only one user can be added per PR
+          - Entries can only have \`github\` and \`note\` fields
+
+          Please fix the issues and push again. Check the [Actions log](${{ github.event.pull_request.html_url }}/checks) for details."
